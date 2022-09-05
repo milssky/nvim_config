@@ -82,8 +82,25 @@ function M.setup()
 			end,
 			requires = { "kyazdani42/nvim-web-devicons" },
 		}
+		
+		use {
+		  'nvim-telescope/telescope.nvim', tag = '0.1.0',
+			requires = { {'nvim-lua/plenary.nvim'} }
+		}	
+		
+		use {
+			"kyazdani42/nvim-tree.lua",
+			requires = {
+				"kyazdani42/nvim-web-devicons",
+			},
+			opt = false,
+			cmd = { "NvimTreeToggle", "NvimTreeClose" },
+			config = function()
+				require("config.nvimtree").setup()
+			end,
+		}
 
-    if packer_bootstrap then
+		if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
     end
