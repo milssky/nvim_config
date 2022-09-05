@@ -1,10 +1,8 @@
 local M = {}
 
 function M.setup()
-  -- Indicate first time installation
   local packer_bootstrap = false
 
-  -- packer.nvim configuration
   local conf = {
     display = {
       open_fn = function()
@@ -13,8 +11,6 @@ function M.setup()
     },
   }
 
-  -- Check if packer.nvim is installed
-  -- Run PackerCompile if there are changes in this file
   local function packer_init()
     local fn = vim.fn
     local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -43,7 +39,8 @@ function M.setup()
         vim.cmd "colorscheme gruvbox-flat"
       end,
     }
-
+		
+		-- Keyboard
 	  use {
 			"folke/which-key.nvim",
       config = function()
@@ -51,6 +48,7 @@ function M.setup()
 			end,
 		}
 
+		-- Git
     use {
       "TimUntersberger/neogit",
       requires = "nvim-lua/plenary.nvim",
@@ -58,7 +56,16 @@ function M.setup()
         require("config.neogit").setup()
       end,
     }
-    	
+
+		-- Visual indent
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("config.indentblankline").setup()
+      end,
+    }
+
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
