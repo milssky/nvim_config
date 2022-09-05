@@ -65,7 +65,23 @@ function M.setup()
         require("config.indentblankline").setup()
       end,
     }
-
+		
+		use {
+			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
+			config = function()
+			require("config.treesitter").setup()
+		end,
+		}
+		
+		use {
+			"nvim-lualine/lualine.nvim",
+			event = "VimEnter",
+			config = function()
+				require("config.lualine").setup()
+			end,
+			requires = { "kyazdani42/nvim-web-devicons" },
+		}
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
