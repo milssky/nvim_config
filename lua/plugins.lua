@@ -39,16 +39,16 @@ function M.setup()
         vim.cmd "colorscheme gruvbox-flat"
       end,
     }
-		
-		-- Keyboard
-	  use {
-			"folke/which-key.nvim",
+
+    -- Keyboard
+    use {
+      "folke/which-key.nvim",
       config = function()
         require("config.whichkey").setup()
-			end,
-		}
+      end,
+    }
 
-		-- Git
+    -- Git
     use {
       "TimUntersberger/neogit",
       requires = "nvim-lua/plenary.nvim",
@@ -57,7 +57,7 @@ function M.setup()
       end,
     }
 
-		-- Visual indent
+    -- Visual indent
     use {
       "lukas-reineke/indent-blankline.nvim",
       event = "BufReadPre",
@@ -65,42 +65,54 @@ function M.setup()
         require("config.indentblankline").setup()
       end,
     }
-		
-		use {
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			config = function()
-			require("config.treesitter").setup()
-		end,
-		}
-		
-		use {
-			"nvim-lualine/lualine.nvim",
-			event = "VimEnter",
-			config = function()
-				require("config.lualine").setup()
-			end,
-			requires = { "kyazdani42/nvim-web-devicons" },
-		}
-		
-		use {
-		  'nvim-telescope/telescope.nvim', tag = '0.1.0',
-			requires = { {'nvim-lua/plenary.nvim'} }
-		}	
-		
-		use {
-			"kyazdani42/nvim-tree.lua",
-			requires = {
-				"kyazdani42/nvim-web-devicons",
-			},
-			opt = false,
-			cmd = { "NvimTreeToggle", "NvimTreeClose" },
-			config = function()
-				require("config.nvimtree").setup()
-			end,
-		}
 
-		if packer_bootstrap then
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+      config = function()
+        require("config.treesitter").setup()
+      end,
+    }
+
+    use {
+      "nvim-lualine/lualine.nvim",
+      event = "VimEnter",
+      config = function()
+        require("config.lualine").setup()
+      end,
+      requires = { "kyazdani42/nvim-web-devicons" },
+    }
+
+    use {
+      'nvim-telescope/telescope.nvim', tag = '0.1.0',
+      requires = { { 'nvim-lua/plenary.nvim' } }
+    }
+
+    use {
+      "kyazdani42/nvim-tree.lua",
+      requires = {
+        "kyazdani42/nvim-web-devicons",
+      },
+      opt = false,
+      cmd = { "NvimTreeToggle", "NvimTreeClose" },
+      config = function()
+        require("config.nvimtree").setup()
+      end,
+    }
+
+    --Auto pairs
+    use {
+      "windwp/nvim-autopairs",
+      wants = "nvim-treesitter",
+      module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
+      opt = false,
+      config = function()
+        require("config.autopairs").setup()
+      end,
+    }
+
+
+    if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
     end
