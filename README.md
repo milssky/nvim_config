@@ -1,6 +1,6 @@
  NVIM minimalistic config
 -------------------------
-TODO
+TODO!
 
 ### Prerequirements
 - nvim 0.7.2+
